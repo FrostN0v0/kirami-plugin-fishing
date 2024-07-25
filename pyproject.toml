@@ -1,0 +1,20 @@
+[project]
+name = "kirami-plugin-fishing"
+version = "0.1.0"
+description = "根据星露谷物语图片素材，粗制滥造的钓鱼游戏"
+authors = [
+    {name = "FrostN0v0", email = "1614591760@qq.com"},
+]
+dependencies = [
+    "kiramibot>=0.3.2",
+    "mango-odm==0.3.2",
+    "numpy>=1.25.2"
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
