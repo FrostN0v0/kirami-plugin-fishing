@@ -59,7 +59,7 @@ conda install kirami-plugin-fishing
 
 打开 KiramiBot 项目根目录下的配置文件, 以 `kirami.toml` 为例，在 `[plugin]` 部分追加写入
 ```toml
-plugins = ["kiramit_plugin_fishing"]
+plugins = ["kiramit-plugin-fishing"]
 ```
 
 ## ⚙️ 配置

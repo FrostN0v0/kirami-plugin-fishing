@@ -11,7 +11,6 @@ from kirami.utils.downloader import Downloader
 from kirami.utils.request import Request
 from kirami.utils.jsondata import JsonDict
 
-from .data_source import get_fish_caught_list
 
 import zipfile
 from io import BytesIO
@@ -94,6 +93,7 @@ def get_pic(pic_path, grey):
 
 
 async def handbook_card_image(gid: str, uid: str):
+    from .data_source import get_fish_caught_list
     row_num = len_card // 11 if len_card % 11 != 0 else len_card // 11 - 1
     base = Image.open(IMAGE_DIR / 'frame.png')
     base = base.resize((40 + 11 * 80 + (11 - 1) * 10, 150 + row_num * 80 + (row_num - 1) * 10),
