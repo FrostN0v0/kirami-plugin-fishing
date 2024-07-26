@@ -10,7 +10,7 @@ _✨ 根据星露谷物语图片素材，粗制滥造的群内钓鱼小游戏 �
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/kirami-plugin-fishing.svg" alt="license">
+    <img src="https://img.shields.io/github/license/FrostN0v0/kirami-plugin-fishing.svg" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/kirami-plugin-fishing">
     <img src="https://img.shields.io/pypi/v/kirami-plugin-fishing.svg" alt="pypi">
