@@ -1,15 +1,18 @@
 import base64
 import os
-import zipfile
+import json
+
 from PIL import Image, ImageFont, ImageDraw, UnidentifiedImageError
 from PIL.Image import Resampling
 from kirami.log import logger
 from kirami.config import IMAGE_DIR, DATA_DIR, FONT_DIR
 from kirami.hook import on_startup
 from kirami.utils.downloader import Downloader
-from .data_source import get_fish_caught_list
-from pathlib import Path
+from kirami.utils.request import Request
 
+from .data_source import get_fish_caught_list
+
+import zipfile
 from io import BytesIO
 
 
@@ -18,35 +21,44 @@ COL_NUM = 11    # 查看仓库时每行显示的卡片个数
 
 Fish_Path = IMAGE_DIR / 'fish'
 DATA_Path = DATA_DIR / 'fishing'
-font = ImageFont.truetype(str(FONT_DIR / 'Uranus_Pixel_11Px.ttf'), 16)
+
 card_file_names_all = []
 image_cache = {}
 len_card = 0
 
 
 @on_startup
-async def init_mockingbird():
+async def init_fishing():
     global len_card
     if not DATA_Path.exists():
-        DATA_Path.mkdir(parents=True, exist_ok=True)
-        await Downloader.download_file(
-            url='https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fish.json',
-            path=DATA_Path
-        )
+        DATA_Path.mkdir(parents=True)
     if not Fish_Path.exists():
         Fish_Path.mkdir()
-        await Downloader.download_file(
-            url='https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fish.zip',
-            path=DATA_Path
-        )
-        with zipfile.ZipFile(Fish_Path / 'fish.zip', 'r') as zip_ref:
-            zip_ref.extractall(Fish_Path)
+        with zipfile.ZipFile(DATA_Path / 'fish.zip') as zip_ref:
+            for member in zip_ref.infolist():
+                try:
+                    decoded_name = member.filename.encode('cp437').decode('gbk')
+                except:
+                    decoded_name = member.filename
+                member.filename = decoded_name
+                zip_ref.extract(member, Fish_Path)
+                logger.info(f"成功解压文件{member.filename}")
     if not (FONT_DIR / "Uranus_Pixel_11Px.ttf").exists():
         await Downloader.download_file(
             url='https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master'
                 '/resources/Uranus_Pixel_11Px.ttf',
             path=FONT_DIR
         )
+        logger.info("下载字体成功")
+    if not (DATA_Path / 'fishes.json').exists():
+        fishdata = await Request.get(
+            url="https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fishes.json")
+        if fishdata.status_code == 200:
+            with open(DATA_Path / 'fishes.json', "w", encoding="utf-8") as file:
+                json.dump(fishdata.json(), file, ensure_ascii=False, indent=4)
+            logger.info("获取数据成功")
+        else:
+            logger.error("获取数据失败，请检查网络是否正常")
 
     image_list = os.listdir(Fish_Path)
     for image in image_list:
@@ -91,11 +103,13 @@ async def handbook_card_image(gid: str, uid: str):
         base.paste(f, (
             30 + col_index * 80 + (col_index - 1) * 10, row_offset + 40 + row_index * 80 + (row_index - 1) * 10), f)
         text_name = c_id.split('.')[0] if c_id[:-4] in caught_list else '???'
-        text_bbox = draw.textbbox((0, 0), text_name, font=font)  # 获取文本边界框
+        text_bbox = draw.textbbox((0, 0), text_name,
+                                  font=ImageFont.truetype(str(FONT_DIR / 'Uranus_Pixel_11Px.ttf'), 16))  # 获取文本边界框
         text_width = text_bbox[2] - text_bbox[0]
         text_x = 30 + col_index * 80 + (col_index - 1) * 10 + (48 - text_width) // 2  # 居中对齐
         text_y = row_offset + 40 + row_index * 80 + (row_index - 1) * 10 + 48 + 5  # 图片下方留5像素间隔
-        draw.text((text_x, text_y), text_name, font=font, fill="black")
+        draw.text((text_x, text_y), text_name,
+                  font=ImageFont.truetype(str(FONT_DIR / 'Uranus_Pixel_11Px.ttf'), 16), fill="black")
     row_offset += 30
     buf = BytesIO()
     base = base.convert('RGB')
