@@ -94,8 +94,8 @@ plugins = ["kiramit_plugin_fishing"]
   "legendary": {
       "BlueShark": {
         "display-name": "鱼名",
-        "weight-min": 160, //  最小重量
-        "weight-max": 240,  //  最大重量
+        "weight-min": 160,
+        "weight-max": 240,
         "msg": "捕获特殊文字"
       }
   }
