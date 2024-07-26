@@ -34,6 +34,10 @@ async def init_fishing():
         DATA_Path.mkdir(parents=True)
     if not Fish_Path.exists():
         Fish_Path.mkdir()
+        await Downloader.download_file(
+            url='https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fish.zip',
+            path=DATA_Path
+        )
         with zipfile.ZipFile(DATA_Path / 'fish.zip') as zip_ref:
             for member in zip_ref.infolist():
                 try:
