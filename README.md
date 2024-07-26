@@ -112,9 +112,9 @@ plugins = ["kiramit_plugin_fishing"]
 
 [默认鱼类图片包](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fish.zip)，解压后，将解压后的文件夹放入kirami的资源图片目录`resources/image/fish`下。
 
-[图鉴字体](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/Uranus_Pixel_11Px.ttf]
+[图鉴字体](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/Uranus_Pixel_11Px.ttf)，放入kirami的字体资源目录`resources/font`下。
 
-[数据json文件](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fishes.json)
+[数据json文件](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fishes.json)，放入kirami的数据目录`data/fishing/`下。
 
 ### 效果图
 <img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/example1.jpg" width='380px' alt="钓鱼示例">
