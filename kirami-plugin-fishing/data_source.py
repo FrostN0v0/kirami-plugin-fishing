@@ -7,12 +7,13 @@ import numpy as np
 from datetime import datetime
 from collections import Counter
 from .config import config
-
+from kirami.utils.jsondata import JsonDict
 from kirami import Bot
 from .model import FishHistory, FishUserData
-from .image_handle import fish_data
 
 fishing_coin_name = config.fishing_coin_name
+
+fish_data = JsonDict(path=config.fish_dir / "fishes.json", auto_load=True)
 
 
 async def get_cd(gid: str, uid: str) -> int:

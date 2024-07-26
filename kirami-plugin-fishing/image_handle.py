@@ -9,7 +9,6 @@ from kirami.config import IMAGE_DIR, DATA_DIR, FONT_DIR
 from kirami.hook import on_startup
 from kirami.utils.downloader import Downloader
 from kirami.utils.request import Request
-from kirami.utils.jsondata import JsonDict
 
 
 import zipfile
@@ -24,13 +23,12 @@ DATA_Path = DATA_DIR / 'fishing'
 
 card_file_names_all = []
 image_cache = {}
-fish_data = {}
 len_card = 0
 
 
 @on_startup
 async def init_fishing():
-    global len_card, fish_data
+    global len_card
     if not DATA_Path.exists():
         DATA_Path.mkdir(parents=True)
     if not Fish_Path.exists():
@@ -65,7 +63,6 @@ async def init_fishing():
         else:
             logger.error("获取数据失败，请检查网络是否正常")
 
-    fish_data = JsonDict(path=DATA_DIR / "fishing" / "fishes.json", auto_load=True)
     image_list = os.listdir(Fish_Path)
     for image in image_list:
         # 图像缓存
