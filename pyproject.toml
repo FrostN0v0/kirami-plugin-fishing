@@ -1,6 +1,6 @@
 [project]
 name = "kirami-plugin-fishing"
-version = "0.1.2"
+version = "0.1.3"
 description = "根据星露谷物语图片素材，粗制滥造的钓鱼游戏"
 authors = [
     {name = "FrostN0v0", email = "1614591760@qq.com"},
