@@ -4,56 +4,25 @@
 
 <div align="center">
 
-# kirami-plugin-example
+# kirami-plugin-fishing
 
-_✨ KiramiBot 插件简单描述 ✨_
+_✨ 根据星露谷物语图片素材，粗制滥造的群内钓鱼小游戏 ✨_
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/kirami-plugin-example.svg" alt="license">
+    <img src="https://img.shields.io/github/license/owner/kirami-plugin-fishing.svg" alt="license">
 </a>
-<a href="https://pypi.python.org/pypi/kiramibot-plugin-example">
-    <img src="https://img.shields.io/pypi/v/kirami-plugin-example.svg" alt="pypi">
+<a href="https://pypi.python.org/pypi/kirami-plugin-fishing">
+    <img src="https://img.shields.io/pypi/v/kirami-plugin-fishing.svg" alt="pypi">
 </a>
 <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 
 </div>
 
-这是一个 KiramiBot 插件项目的模板库, 你可以直接使用本模板创建你的 KiramiBot 插件项目的仓库
-
-模板库使用方法:
-1. 点击仓库中的 "Use this template" 按钮, 输入仓库名与描述, 点击 "Create repository from template" 创建仓库
-2. 在创建好的新仓库中, 在 "Add file" 菜单中选择 "Create new file", 在新文件名处输入`LICENSE`, 此时在右侧会出现一个 "Choose a license template" 按钮, 点击此按钮选择开源协议模板, 然后在最下方提交新文件到主分支
-3. 全局替换`owner`为仓库所有者ID; 全局替换`kirami-plugin-example`为插件名; 全局替换`kirami_plugin_example`为包名; 修改 python 徽标中的版本为你插件的运行所需版本
-4. 修改 README 中的插件名和插件描述, 并在下方填充相应的内容
-
-配置发布工作流:
-1. 跟随 [PyPI 文档](https://docs.pypi.org/trusted-publishers/) 配置 可信发布
-   - **PyPI Project Name** 插件名，如：`kirami-plugin-xxx`
-   - **Owner** 你的 Github 用户名
-   - **Repository name** 仓库名，如：`kirami-plugin-xxx`
-   - **Workflow name** 发布工作流，填写 `release.yml`
-   - **Environment name** 是你的发布环境，填写 `release`
-     
-   例如，如果您有一个位于 https://github.com/octo-org/sampleproject 的存储库，其发布工作流程位于 `release.yml`，并且您希望将其作为示例项目发布到 PyPI，那么您将执行以下操作： 
-   <div align="left">
-     <img src="https://docs.pypi.org/assets/pending-publisher-form-filled.png" style="wight: 1000px; height: 600px"/>
-   </div>
-
-3. 进入工作流，修改 `environment`
-   
-   ```yaml
-   environment:
-      name: release
-      url: https://pypi.org/p/<your-pypi-project-name>
-   ```
-
-4. 发版
-
 
 ## 📖 介绍
 
-这里是插件的详细介绍部分
+素材采自 [星露谷物语Wiki](https://stardewvalleywiki.com/Stardew_Valley_Wiki)，群内钓鱼娱乐小游戏，**提前刷屏警告**。
 
 ## 💿 安装
 
@@ -63,50 +32,91 @@ _✨ KiramiBot 插件简单描述 ✨_
 <summary>pip</summary>
   
 ```bash
-pip install kirami-plugin-example
+pip install kirami-plugin-fishing
 ```
 </details>
 <details>
 <summary>pdm</summary>
 
 ```bash
-pdm add kirami-plugin-example
+pdm add kirami-plugin-fishing
 ```
 </details>
 <details>
 <summary>poetry</summary>
 
 ```bash
-poetry add kirami-plugin-example
+poetry add kirami-plugin-fishing
 ```
 </details>
 <details>
 <summary>conda</summary>
 
 ```bash
-conda install kirami-plugin-example
+conda install kirami-plugin-fishing
 ```
 </details>
 
 打开 KiramiBot 项目根目录下的配置文件, 以 `kirami.toml` 为例，在 `[plugin]` 部分追加写入
 ```toml
-plugins = ["kiramit_plugin_example"]
+plugins = ["kiramit_plugin_fishing"]
 ```
 
 ## ⚙️ 配置
 
 在 KiramiBot 项目的配置文件中添加下表中的必填配置
 
-| 配置项 | 必填 | 默认值 | 说明 |
-|:-----:|:----:|:----:|:----:|
-| 配置项1 | 是 | 无 | 配置说明 |
-| 配置项2 | 否 | 无 | 配置说明 |
+|         配置项         | 必填 |   默认值    |       说明        |
+|:-------------------:|:--:|:--------:|:---------------:|
+|    fishing_limit    | 否  |   1800   |  钓鱼CD时间（单位：秒）   |
+|   fish_multiplier   | 否  |   1.0    |   获取积分（鱼干）倍率    |
+| fishing_time_radius | 否  | [30,150] | 上钩时间[最小时间,最大时间] |
+|  fishing_coin_name  | 否  |   块小鱼干   |     钓鱼积分名称      |
+|  fish_empty_chance  | 否  |   0.1    |      空军概率       |
 
 ## 🎉 使用
 ### 指令表
-| 指令 | 权限 | 需要@ | 范围 | 说明 |
-|:-----:|:----:|:----:|:----:|:----:|
-| 指令1 | 主人 | 否 | 私聊 | 指令说明 |
-| 指令2 | 群员 | 是 | 群聊 | 指令说明 |
+|   指令    | 权限 | 需要@ | 范围 |       说明        |
+|:-------:|:--:|:---:|:--:|:---------------:|
+|  钓鱼/🎣  | 群员 |  否  | 群聊 |       钓鱼        |
+|  钓鱼统计   | 群员 |  否  | 群聊 |  获取个人群内钓鱼统计信息   |
+|  钓鱼排名   | 群员 |  否  | 群聊 | 获取群内钓鱼排行榜（按最重鱼） |
+| 钓鱼余额/鱼干 | 群员 |  否  | 群聊 |  获取群内钓鱼积分排行统计   |
+| 钓鱼手册/鱼鉴 | 群员 |  否  | 群聊 |    获取钓鱼收集图鉴     |
+
+### 自定义鱼类
+**1、添加json数据**
+
+插件会在启动时，补全json数据到kirami的数据目录下的`fishing`文件夹下，在该文件内新增鱼类数据和稀有度即可。
+鱼类数据添加到对应稀有度下，格式如下：
+```json
+{
+  "legendary": {
+      "BlueShark": {
+        "display-name": "鱼名",
+        "weight-min": 160, //  最小重量
+        "weight-max": 240,  //  最大重量
+        "msg": "捕获特殊文字"
+      }
+  }
+}
+```
+**2、添加图片（可选）**
+
+插件启动时，会检测kirami资源图片目录下是否有`fish`文件夹，如果没有，则自动创建，并下载默认图包。
+如果需要添加自定义鱼类的图片，只需要将该以json文件中，与展示名称相同的文件名的图片放入该目录即可。
+
+### 资源下载
+
+如果插件启动时，无法下载资源，请手动下载资源。
+
+[默认鱼类图片包](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fish.zip)，解压后，将解压后的文件夹放入kirami的资源图片目录`resources/image/fish`下。
+
+[图鉴字体](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/Uranus_Pixel_11Px.ttf]
+
+[数据json文件](https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/fishes.json)
+
 ### 效果图
-如果有效果图的话
+<img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/example1.jpg" width='380px' alt="钓鱼示例">
+
+<img align="left" src="https://ghproxy.com/https://raw.githubusercontent.com/FrostN0v0/kirami-plugin-fishing/master/resources/example2.jpg" width='380px' alt="钓鱼手册示例">
