@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: release
-      url: https://pypi.org/p/<your-pypi-project-name>
+      url: https://pypi.org/p/kirami-plugin-fishing
     permissions:
       id-token: write  # 重要提示：此权限对于可信发布是必需的
 
